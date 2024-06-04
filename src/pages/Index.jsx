@@ -1,18 +1,36 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Container, Text, VStack, Box, Heading, SimpleGrid, GridItem, Flex, Spacer, IconButton } from "@chakra-ui/react";
+import { FaProjectDiagram, FaTasks, FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const projects = [
+  { id: 1, name: "Project Alpha", status: "In Progress", tasksCompleted: 5, totalTasks: 10 },
+  { id: 2, name: "Project Beta", status: "Completed", tasksCompleted: 10, totalTasks: 10 },
+  { id: 3, name: "Project Gamma", status: "Delayed", tasksCompleted: 3, totalTasks: 10 },
+];
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
+    <Container maxW="container.xl" p={4}>
+      <Flex mb={4} alignItems="center">
+        <Heading as="h1" size="lg">Project Status Dashboard</Heading>
+        <Spacer />
+        <IconButton aria-label="Projects" icon={<FaProjectDiagram />} size="lg" />
+      </Flex>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
+        {projects.map((project) => (
+          <GridItem key={project.id} w="100%">
+            <Box p={4} borderWidth="1px" borderRadius="lg" overflow="hidden">
+              <Heading as="h3" size="md" mb={2}>{project.name}</Heading>
+              <Text>Status: {project.status}</Text>
+              <Text>Tasks Completed: {project.tasksCompleted}/{project.totalTasks}</Text>
+              <Flex mt={2}>
+                {project.status === "Completed" && <FaCheckCircle color="green" />}
+                {project.status === "In Progress" && <FaTasks color="blue" />}
+                {project.status === "Delayed" && <FaExclamationTriangle color="red" />}
+              </Flex>
+            </Box>
+          </GridItem>
+        ))}
+      </SimpleGrid>
     </Container>
   );
 };
