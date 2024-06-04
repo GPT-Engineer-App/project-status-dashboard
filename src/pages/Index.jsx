@@ -1,4 +1,4 @@
-import { Container, Text, VStack, Box, Heading, SimpleGrid, GridItem, Flex, Spacer, IconButton } from "@chakra-ui/react";
+import { Container, Text, VStack, Box, Heading, SimpleGrid, GridItem, Flex, Spacer, IconButton, Progress } from "@chakra-ui/react";
 import { FaProjectDiagram, FaTasks, FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
 const projects = [
@@ -22,6 +22,7 @@ const Index = () => {
               <Heading as="h3" size="md" mb={2}>{project.name}</Heading>
               <Text>Status: {project.status}</Text>
               <Text>Tasks Completed: {project.tasksCompleted}/{project.totalTasks}</Text>
+              <Progress value={(project.tasksCompleted / project.totalTasks) * 100} size="sm" colorScheme="blue" mt={2} />
               <Flex mt={2}>
                 {project.status === "Completed" && <FaCheckCircle color="green" />}
                 {project.status === "In Progress" && <FaTasks color="blue" />}
